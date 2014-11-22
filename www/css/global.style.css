@@ -10,6 +10,60 @@ body {
   float: left;
   width: 50px;
 }
+#db-stats {
+    float: left;
+    clear: left;
+    position: relative;
+    overflow: hidden;
+}
+#search-in-map {
+    float: right;
+    clear: right;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    right: 25%;
+    width: 200px;
+}
+
+/* Landing page layout */
+#left {
+    float: left;
+    max-width: 50%;
+    overflow: hidden;
+    padding: 1em 1em 1em 1em;
+    width: 50%;
+}
+#mid {
+    float: left;
+    max-width: 25%;
+    min-width: 25%;
+    overflow: hidden;
+    padding: 1em 1em 1em 1em;
+    width: 25%;
+}
+#mid div {
+    max-width: 99%;
+    width: 99%;
+}
+#right {
+    float: left;
+    min-width: 20%;
+    max-width: 20%;
+    overflow: hidden;
+    padding: 0 0 1em 0;
+    width: 20%;
+}
+#right img {
+    clear: both;
+    float: left;
+    height: 200px;
+    max-width: 99%;
+    min-height: 200px;
+    min-width: 99%;
+    padding: 1em 0 1em 0;
+    width: 99%;
+}
 #footer {
     clear: both;
     text-align: center;
