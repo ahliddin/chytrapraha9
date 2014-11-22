@@ -10,3 +10,8 @@ body {
   float: left;
   width: 50px;
 }
+#footer {
+    clear: both;
+    text-align: center;
+    width: 100%;
+}
