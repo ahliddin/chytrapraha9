@@ -27,14 +27,14 @@ body {
 }
 
 /* Landing page layout */
-#left {
+#landing-left {
     float: left;
     max-width: 50%;
     overflow: hidden;
     padding: 1em 1em 1em 1em;
     width: 50%;
 }
-#mid {
+#landing-mid {
     float: left;
     max-width: 25%;
     min-width: 25%;
@@ -42,11 +42,11 @@ body {
     padding: 1em 1em 1em 1em;
     width: 25%;
 }
-#mid div {
+#landing-mid div {
     max-width: 99%;
     width: 99%;
 }
-#right {
+#landing-right {
     float: left;
     min-width: 20%;
     max-width: 20%;
@@ -54,7 +54,7 @@ body {
     padding: 0 0 1em 0;
     width: 20%;
 }
-#right img {
+#landing-right img {
     clear: both;
     float: left;
     height: 200px;
