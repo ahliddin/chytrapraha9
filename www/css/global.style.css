@@ -64,6 +64,38 @@ body {
     padding: 1em 0 1em 0;
     width: 99%;
 }
+/* List schools of type X layout */
+#list-left {
+    float: left;
+    max-width: 70%;
+    overflow: hidden;
+    padding: 1em 1em 1em 1em;
+    width: 70%;
+}
+#list-left .list-detail {
+    border: 2px solid grey;
+    padding: 0em 1em 0em 1em;
+}
+#list-left .list-detail img {
+    float: right;
+    height: 100px;
+    width: 200px;
+}
+#list-left #list-navigation {
+    float: right;
+}
+#list-right {
+    float: right;
+    max-width: 25%;
+    overflow: hidden;
+    padding: 1em 1em 1em 1em;
+    width: 25%;
+}
+#list-right div {
+    max-width: 99%;
+    width: 99%;
+}
+/* Footer */
 #footer {
     clear: both;
     text-align: center;
