@@ -4,6 +4,9 @@
     position: relative;
     overflow: hidden;
 }
+#map-filter .filter-item {
+    display: block;
+}
 #map-canvas {
     float: left;
     width: 75%;
@@ -11,7 +14,4 @@
     padding: 1em 1em 1em 1em;
     position: relative;
     overflow: hidden;
-}
-.filter-item {
-    display: block;
 }
