@@ -8,7 +8,7 @@
 }
 #list-left .list-detail {
     border: 2px solid grey;
-    padding: 0em 1em 0em 1em;
+    padding: 0.5em 1em 0.5em 1em;
 }
 #list-left .list-detail img {
     float: right;
