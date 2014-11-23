@@ -916,7 +916,8 @@ textarea {
 }
 a {
   color: #0B0C0D;/*#337ab7;*/
-  text-decoration: none;
+  font-weight: bolder;
+  text-decoration: underline;
 }
 a:hover,
 a:focus {
