@@ -1,0 +1,78 @@
+{block styles}
+<link href="{$basePath}/css/detail.style.css" rel="stylesheet">
+{/block}
+
+{block content}
+<div id="left">
+    <h2>Základní škola X</h2>
+    <h3>Základní informace</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+    <h3>Novinky od roku 2014</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+    <h3>Komentáře</h3>
+    TODO - FB integrace<br />
+</div>
+<div id="mid">
+    <div id="contact">
+        <h3>Kontakty</h3>
+        <h4>Adresa</h4>
+        Kocourkovska 123,<br />
+        Praha 9 - Kocourkov<br />
+        <h4>Telefon</h4>
+        +420 281 001 223<br />
+        <h4>E-mail</h4>
+        <a href="mailto:kancelar@zs1.cz">kancelar@zs1.cz</a>
+        <h4>Ostatní</h4>
+        Fax: +420 281 001 224<br />
+        IČ: 34 23 54 23<br />
+        <br />
+        Školní jídelna: +420 281 001 225
+    </div>
+</div>
+<div id="right">
+    TODO - asocialni ikonky<br />
+    <h3>Hodnocení</h3>
+    TODO - pridat hodnoceni<br />
+    <h3>Aktuálně</h3>
+    <div class="news-item">31.10.2014 - <a href="#">Lorem ipsum</a> dolor sit amet,
+        consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+        Aenean massa.
+    </div>
+    <hr />
+    <div class="news-item">31.10.2014 - <a href="#">Lorem ipsum</a> dolor sit amet,
+        consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+        Aenean massa.
+    </div>
+    <hr />
+    <div class="news-item">31.10.2014 - <a href="#">Lorem ipsum</a> dolor sit amet,
+        consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+        Aenean massa.
+    </div>
+    <hr />
+    <div class="news-item">31.10.2014 - <a href="#">Lorem ipsum</a> dolor sit amet,
+        consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+        Aenean massa.
+    </div>
+    <h3>Zobrazení na mapě</h3>
+    <div id="map-container">
+        <div id="map-canvas"></div>
+        <a id="map-magnifier" href="#">Zvětšit mapu</a>
+    </div>
+</div>
+{/block}
+
+{block scripts}
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script>
+    function initialize() {
+        var mapCanvas = document.getElementById('map-canvas');
+        var mapOptions = {
+            center: new google.maps.LatLng(44.5403, -78.5463),
+            zoom: 8,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(mapCanvas, mapOptions)
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+{/block}
