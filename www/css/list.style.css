@@ -13,6 +13,7 @@
 #list-left .list-detail img {
     float: right;
     height: 100px;
+    padding: 1em 0em 1em 0em;
     width: 200px;
 }
 #list-left #list-navigation {
