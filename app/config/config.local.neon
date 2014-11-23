@@ -2,8 +2,8 @@ parameters:
 
 
 database:
-	dsn: 'mysql:host=127.0.0.1;dbname=test'
-	user:
-	password:
+	dsn: 'mysql:host=s1.oneplace.cz;dbname=ete89e_04_i'
+	user: 'ete89e_04_i'
+	password: 'QasX2sfY'
 	options:
-		lazy: yes
+		lazy: no

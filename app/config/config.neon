@@ -20,8 +20,16 @@ nette:
 	session:
 		expiration: 14 days
 
+	database:
+		dsn: 'mysql:host=s1.oneplace.cz;dbname=ete89e_04_i'
+		user: 'ete89e_04_i'
+		password: 'QasX2sfY'
+		options:
+			lazy: no
+
 
 services:
 	- App\Model\UserManager
 	- App\RouterFactory
 	router: @App\RouterFactory::createRouter
+	database: @nette.database.default
