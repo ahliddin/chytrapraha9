@@ -1,17 +1,16 @@
-#map-filter {
-    float: left;
-    padding: 0em 1em 0em 1em;
-    position: relative;
-    overflow: hidden;
+
+#ifilter ul {
+    list-style: none;
+    padding-left: 10px;
 }
-#map-filter .filter-item {
-    display: block;
-}
+
 #map-canvas {
-    float: left;
-    width: 75%;
     height: 400px;
     padding: 1em 1em 1em 1em;
     position: relative;
     overflow: hidden;
+}
+
+div.infowindowContent {
+    width: 100%;
 }

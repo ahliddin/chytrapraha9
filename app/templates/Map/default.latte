@@ -5,30 +5,20 @@
 {block content}
 <h1>Vyhledávání na mapě</h1>
 <div class="row">
-    <div class="col-sm-3">
+    <div class="col-sm-3 well">
         <h3>Filtr institucí</h3>
-        <form action="#" method="#">
-            <span class="filter-item">
-                <input name="ms" type="checkbox" /> Mateřské školy<br />
-            </span>
-            <span class="filter-item">
-                <input name="zs" type="checkbox" /> Základní školy<br />
-            </span>
-            <span class="filter-item">
-                <input name="gymn" type="checkbox" /> Gymnázia<br />
-            </span>
-            <span class="filter-item">
-                <input name="ss" type="checkbox" /> Střední školy<br />
-            </span>
-            <span class="filter-item">
-                <input name="vc" type="checkbox" /> Vzdělávací centra<br />
-            </span>
-            <span class="filter-item">
-                <input name="ks" type="checkbox" /> Kulturní střediska<br />
-            </span>
+        <form id="ifilter" action="#" method="#">
+            <ul>
+                {foreach $categories as $c}
+                <li class="filter-item">
+                    <input name="{$c->url_id}" id="{$c->url_id}" value="{$c->url_id}" type="checkbox" checked />
+                    <label for="{$c->url_id}">{$c->name}</label>
+                </li>
+                {/foreach}
+            </ul>
         </form>
     </div>
-    <div class="col-sm-9">
+    <div class="col-sm-9 thumbnail">
         <div id="map-canvas"></div>
     </div>
 </div>
@@ -37,6 +27,9 @@
 {block scripts}
 <script src="https://maps.googleapis.com/maps/api/js"></script>
 <script>
+    var data = JSON.parse({$jsonData});
+    var markers = {};
+    
     function initialize() {
         var mapCanvas = document.getElementById('map-canvas');
         var mapOptions = {
@@ -44,8 +37,79 @@
             zoom: 14,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         }
-        var map = new google.maps.Map(mapCanvas, mapOptions)
+        var map = new google.maps.Map(mapCanvas, mapOptions);
+        
+        for (var i in data) {
+            var c = data[i];
+            markers[i] = [];
+            for (var j in c.institutions) {
+                var inst = c.institutions[j];
+                markers[i].push(appendInstitution(map, inst, i));
+            }
+        }
+        
+        $('#ifilter input').on('change', function(e) {
+            if ($(e.currentTarget).is(':checked')) {
+                for (var i in markers[e.currentTarget.value]) {
+                    var m = markers[e.currentTarget.value][i];
+                    m.setMap(map);
+                }
+            } else {
+                for (var i in markers[e.currentTarget.value]) {
+                    var m = markers[e.currentTarget.value][i];
+                    m.setMap(null);
+                }
+            }
+        });
     }
     google.maps.event.addDomListener(window, 'load', initialize);
+    
+    function appendInstitution(map, i, cId) {
+        var iLoc = new google.maps.LatLng(i.lat, i.lng);
+        var marker = new google.maps.Marker({
+            position: iLoc,
+            map: map,
+            title: i.name,
+            icon: getMarkerImage(cId)
+        });
+        var infowindow = new google.maps.InfoWindow({
+            content: '<a href="#"><h4>' + i.name + '</h4></a>'
+                        + '<div class="row infowindowContent"><address class="col-xs-8">'
+                        + i.address_street + '<br />'
+                        + i.address_city + '<br />'
+                        + i.address_postal_code
+                        + '</address><div class="col-xs-4">'
+                        + '<img src="/images/institutions/' + i.frontImage + '" />'
+                        + '</div></div>'
+        });
+        google.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(map, marker);
+        });
+        
+        if (i.default) {
+            map.setCenter(iLoc);
+            infowindow.open(map, marker);
+        }
+        
+        return marker;
+    }
+    
+    function getMarkerImage(cId) {
+        var path = '/img/markers/';
+        switch (cId) {
+            case 'zakladni-skoly':
+                return path + 'school.png';
+            case 'stredni-skoly-a-gymnazia':
+                return path + 'highschool.png';
+            case 'materske-skoly':
+                return path + 'nanny.png';
+            case 'vzdelavaci-centra':
+                return path + 'university.png';
+            case 'kulturni-strediska':
+                return path + 'dance_class.png';
+            default:
+                return null;
+        }
+    }
 </script>
 {/block}

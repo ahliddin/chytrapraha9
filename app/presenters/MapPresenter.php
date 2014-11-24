@@ -10,8 +10,30 @@ use Nette,
 
 class MapPresenter extends BasePresenter
 {
-    public function renderDefault()
+    public function renderDefault($urlId)
     {
-        $this->template->anyVariable = 'any value';
+        $categories = $this->db->table('category');
+        $this->template->categories = $categories;
+        
+        
+        $institutions = $this->db->table('institution')
+                                 ->select('institution.*, category.name AS category_name, category.url_id AS category_url_id');
+        $data = array();
+        foreach ($institutions as $i) {
+            $data[$i->category_url_id]['name'] = $i->category_name;
+            $data[$i->category_url_id]['institutions'][] = array(
+                'name' => $i->name,
+                'address_street' => $i->address_street,
+                'address_city' => $i->address_city,
+                'address_postal_code' => $i->address_postal_code,
+                'lat' => $i->lat,
+                'lng' => $i->lng,
+                'frontImage' => $i->front_image,
+                'default' => ($urlId == $i->url_id) ? true : false
+            );
+        }
+        
+        $this->template->data = $data;
+        $this->template->jsonData = json_encode($data);
     }
 }
