@@ -1,9 +1,11 @@
-
+#map-canvas {
+    height: 200px;
+    width: 100%;
+}
 div.fb-share,
 div.tw-share {
     margin: 0 3px;
 }
-
 div.social {
     width: 100%;
     margin-bottom: 8px;
