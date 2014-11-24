@@ -1,5 +1,6 @@
 {block styles}
 <link href="{$basePath}/css/detail.style.css" rel="stylesheet">
+<link href="{$basePath}/js/plugins/star-rating/css/star-rating.min.css" rel="stylesheet">
 {/block}
 
 {block content}
@@ -53,6 +54,23 @@
         </div>
     </div>
     <aside class="col-sm-3">
+        <div class="well text-center">
+            <input id="institution-rating"
+                   class="rating"
+                   data-show-clear="false"
+                   data-show-caption="false"
+                   data-step="1"
+                   value="{$i->rating_score}" />
+            <span>
+                {if $i->rating_votes == 1}
+                    Hodnotil {$i->rating_votes} návštěvník
+                {elseif $i->rating_votes >= 2 && $i->rating_votes <= 4}
+                    Hodnotili {$i->rating_votes} návštěvníci
+                {else}
+                    Hodnotilo {$i->rating_votes} návštěvníků
+                {/if}
+            </span>
+        </div>
         <div class="thumbnail">
             <img src="/images/institutions/{$i->front_image}" alt="{$i->name}" title="{$i->name}" />
         </div>
@@ -85,6 +103,7 @@
 {/block}
 
 {block scripts}
+<script src="{$basePath}/js/plugins/star-rating/js/star-rating.min.js"></string>
 <script src="https://maps.googleapis.com/maps/api/js"></script>
 <script>
     var iLoc = new google.maps.LatLng({$i->lat}, {$i->lng});
@@ -124,5 +143,12 @@
     !function(d,s,id) {
         var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){ js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs); }
     }(document, 'script', 'twitter-wjs');
+</script>
+
+<script>
+    $('#institution-rating').on('rating.change', function(event, value, caption) {
+        console.log(value);
+        console.log(caption);
+    });
 </script>
 {/block}
