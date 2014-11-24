@@ -24,13 +24,18 @@
                     <span class="locality">{$i->address_city}</span><br />
                     <span class="postal-code">{$i->address_postal_code}</span>
                 </address>
+                <h4>GPS</h4>
+                <p class="geo">
+                    N: <span class="latitude">{$i->lat}</span><br />
+                    E: <span class="longitude">{$i->lng}</span>
+                </p>
                 <h3>Spojení</h3>
                 <p>
                     <span class="tel">
                         Telefon: <span class="value">{$i->contact_phone}</span>
                     </span><br />
-                    Email: <a href="mailto:{$i->contact_email}">{$i->contact_email}</a><br />
-                    Web: <a href="{$i->contact_website}">{$i->contact_website}</a><br />
+                    Email: <a class="email" href="mailto:{$i->contact_email}">{$i->contact_email}</a><br />
+                    Web: <a class="url" href="{$i->contact_website}">{$i->contact_website}</a><br />
                 </p>
                 <h3>Další kontakty</h3>
                 <p>
@@ -82,14 +87,35 @@
 {block scripts}
 <script src="https://maps.googleapis.com/maps/api/js"></script>
 <script>
+    var iLoc = new google.maps.LatLng({$i->lat}, {$i->lng});
     function initialize() {
         var mapCanvas = document.getElementById('map-canvas');
         var mapOptions = {
-            center: new google.maps.LatLng(44.5403, -78.5463),
-            zoom: 8,
+            center: iLoc,
+            zoom: 13,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         }
         var map = new google.maps.Map(mapCanvas, mapOptions)
+        
+        var infowindow = new google.maps.InfoWindow({
+            content: '<h4>' + {$i->name} + '</h4>'
+                        + '<address>'
+                        + {$i->address_street} + '<br />'
+                        + {$i->address_city} + '<br />'
+                        + {$i->address_postal_code}
+                        + '</address>'
+        });
+        var marker = new google.maps.Marker({
+            position: iLoc,
+            map: map,
+            title: {$i->name}
+        });
+        
+        google.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(map,marker);
+        });
+
+        
     }
     google.maps.event.addDomListener(window, 'load', initialize);
 </script>
