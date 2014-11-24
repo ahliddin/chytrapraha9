@@ -16,19 +16,21 @@
             <div class="col-sm-8">
                 {$i->text|noescape}    
             </div>
-            <div class="col-sm-4 well">
-                <h2>Kontakty</h2>
+            <div class="col-sm-4 well vcard">
+                <h2 class="organization-name">{$i->name}</h2>
                 <h3>Adresa</h3>
-                <p>
-                    {$i->address_street}<br />
-                    {$i->address_city}<br />
-                    {$i->address_postal_code}
-                </p>
+                <address>
+                    <span class="street-address">{$i->address_street}</span><br />
+                    <span class="locality">{$i->address_city}</span><br />
+                    <span class="postal-code">{$i->address_postal_code}</span>
+                </address>
                 <h3>Spojení</h3>
                 <p>
-                    Telefon: {$i->contact_phone}<br />
-                    Email: {$i->contact_email}<br />
-                    Web: {$i->contact_website}<br />
+                    <span class="tel">
+                        Telefon: <span class="value">{$i->contact_phone}</span>
+                    </span><br />
+                    Email: <a href="mailto:{$i->contact_email}">{$i->contact_email}</a><br />
+                    Web: <a href="{$i->contact_website}">{$i->contact_website}</a><br />
                 </p>
                 <h3>Další kontakty</h3>
                 <p>
@@ -45,7 +47,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-3">
+    <aside class="col-sm-3">
         <div class="thumbnail">
             <img src="/images/institutions/{$i->front_image}" alt="{$i->name}" title="{$i->name}" />
         </div>
@@ -73,7 +75,7 @@
             <div id="map-canvas"></div>
             <a id="map-magnifier" href="#">Zvětšit mapu</a>
         </div>
-    </div>
+    </aside>
 </div>
 {/block}
 
