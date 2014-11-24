@@ -23,8 +23,8 @@ class RouterFactory
                 $router[] = new Route('', 'Homepage:default');
 		$router[] = new Route('index.php', 'Homepage:default');
                 $router[] = new Route('mapa-instituci', 'Map:default');
-                $router[] = new Route('<url_id>', 'List:default');
-                $router[] = new Route('<category_url_id>/<url_id>', 'Detail:default');
+                $router[] = new Route('<urlId>', 'List:default');
+                $router[] = new Route('<categoryUrlId>/<urlId>', 'Detail:default');
 		return $router;
 	}
 

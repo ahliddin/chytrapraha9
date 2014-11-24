@@ -1,32 +1,5 @@
 /* List schools of type X layout */
-#left {
-    float: left;
-    max-width: 70%;
-    overflow: hidden;
-    padding: 1em 1em 1em 1em;
-    width: 70%;
-}
-#left .list-detail {
-    border: 2px solid grey;
-    padding: 0.5em 1em 0.5em 1em;
-}
-#left .list-detail img {
-    float: right;
-    height: 100px;
-    padding: 1em 0em 1em 0em;
-    width: 200px;
-}
-#left #list-navigation {
-    float: right;
-}
-#right {
-    float: right;
-    max-width: 25%;
-    overflow: hidden;
-    padding: 1em 1em 1em 1em;
-    width: 25%;
-}
-#right div {
-    max-width: 99%;
-    width: 99%;
+
+.well h2 {
+    margin-top: 0;
 }

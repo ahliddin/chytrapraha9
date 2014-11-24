@@ -3,56 +3,53 @@
 {/block}
 
 {block content}
-<div id="left">
-    <div id="list-navigation">
-        <a href="#">&lt; Předchozí</a> | <a href="#">Další &gt;</a>
+
+<div class="row">
+    <div class="col-sm-9">
+        <div class="panel">
+            <h1>{$category->name}</h1>
+            <div id="categoryDescription">
+                {$category->text|noescape}
+            </div>
+        </div>
+        {foreach $institutions as $i}
+            <div class="">
+                <div class="row well">
+                    <div class="col-sm-12">
+                        <h2>
+                            <a n:href="Detail:default categoryUrlId => $i->category_url_id, urlId => $i->url_id">
+                                <strong>{$i->name}</strong>
+                            </a><br />
+                            <small>{$i->address_street}, {$i->address_city}</small>
+                        </h2>
+                    </div>
+                    <div class="col-sm-2">
+                        <img class="thumbnail" src="{$basePath}/images/institutions/{$i->front_image}" alt="{$i->name}" />
+                    </div>
+                    <div class="col-sm-10">
+
+                        <div>
+                            {$i->short_description}
+                            <a href="#" class="btn btn-xs btn-primary">více...</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {/foreach}
     </div>
-    <h2>Základní školy</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
-    <div class="list-detail">
-        <p>
-            <img class="thumbnail" src="{$basePath}/img/school-thumbnail.png" alt="Zakladni skola X" />
-            <a n:href="Detail:default">Základní škola X</a>, Kocourkovska 123, Praha 9<br />
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. <a href="#">více...</a>
-        </p>
-    </div>
-    <br />
-    <div class="list-detail">
-        <p>
-            <img class="thumbnail" src="{$basePath}/img/school-thumbnail.png" alt="Zakladni skola X" />
-            <a n:href="Detail:default">Základní škola X</a>, Kocourkovska 123, Praha 9<br />
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. <a href="#">více...</a>
-        </p>
-    </div>
-    <br />
-    <div class="list-detail">
-        <p>
-            <img class="thumbnail" src="{$basePath}/img/school-thumbnail.png" alt="Zakladni skola X" />
-            <a n:href="Detail:default">Základní škola X</a>, Kocourkovska 123, Praha 9<br />
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. <a href="#">více...</a>
-        </p>
-    </div>
-</div>
-<div id="right">
-    <h3>Aktuálně</h3>
-    <div class="news-item">31.10.2014 - <a href="#">Lorem ipsum</a> dolor sit amet,
-        consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-        Aenean massa.
-    </div>
-    <hr />
-    <div class="news-item">31.10.2014 - <a href="#">Lorem ipsum</a> dolor sit amet,
-        consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-        Aenean massa.
-    </div>
-    <hr />
-    <div class="news-item">31.10.2014 - <a href="#">Lorem ipsum</a> dolor sit amet,
-        consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-        Aenean massa.
-    </div>
-    <hr />
-    <div class="news-item">31.10.2014 - <a href="#">Lorem ipsum</a> dolor sit amet,
-        consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-        Aenean massa.
+    <div class="col-sm-3">
+        <h3>Aktuálně</h3>
+        {foreach $news as $n}
+            <div class="news-item">{$n->date|date:'%d.%m.%Y'}
+                -
+                <a n:href="Detail:default categoryUrlId => $n->category_url_id, urlId => $n->url_id">
+                    {$n->name}
+                </a>
+                <br />
+                {$n->text}
+            </div>
+            {sep}<hr />{/sep}
+        {/foreach}
     </div>
 </div>
 {/block}

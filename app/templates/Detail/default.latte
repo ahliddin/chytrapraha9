@@ -3,60 +3,76 @@
 {/block}
 
 {block content}
-<div id="left">
-    <h2>Základní škola X</h2>
-    <h3>Základní informace</h3>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
-    <h3>Novinky od roku 2014</h3>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
-    <h3>Komentáře</h3>
-    TODO - FB integrace<br />
-</div>
-<div id="mid">
-    <div id="contact">
-        <h3>Kontakty</h3>
-        <h4>Adresa</h4>
-        Kocourkovska 123,<br />
-        Praha 9 - Kocourkov<br />
-        <h4>Telefon</h4>
-        +420 281 001 223<br />
-        <h4>E-mail</h4>
-        <a href="mailto:kancelar@zs1.cz">kancelar@zs1.cz</a>
-        <h4>Ostatní</h4>
-        Fax: +420 281 001 224<br />
-        IČ: 34 23 54 23<br />
-        <br />
-        Školní jídelna: +420 281 001 225
+
+<div class="row">
+    <div class="col-sm-9">
+        <div class="jumbotron">
+            <h1>{$i->name}</h1>
+            <div>
+                {$i->short_description}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                {$i->text|noescape}    
+            </div>
+            <div class="col-sm-4 well">
+                <h2>Kontakty</h2>
+                <h3>Adresa</h3>
+                <p>
+                    {$i->address_street}<br />
+                    {$i->address_city}<br />
+                    {$i->address_postal_code}
+                </p>
+                <h3>Spojení</h3>
+                <p>
+                    Telefon: {$i->contact_phone}<br />
+                    Email: {$i->contact_email}<br />
+                    Web: {$i->contact_website}<br />
+                </p>
+                <h3>Další kontakty</h3>
+                <p>
+                    {$i->contact_others|noescape}
+                </p>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Komentáře
+            </div>
+            <div class="panel-body">
+                <div class="fb-comments" data-width="100%" data-numposts="5" data-colorscheme="light"></div>
+            </div>
+        </div>
     </div>
-</div>
-<div id="right">
-    TODO - asocialni ikonky<br />
-    <h3>Hodnocení</h3>
-    TODO - pridat hodnoceni<br />
-    <h3>Aktuálně</h3>
-    <div class="news-item">31.10.2014 - <a href="#">Lorem ipsum</a> dolor sit amet,
-        consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-        Aenean massa.
-    </div>
-    <hr />
-    <div class="news-item">31.10.2014 - <a href="#">Lorem ipsum</a> dolor sit amet,
-        consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-        Aenean massa.
-    </div>
-    <hr />
-    <div class="news-item">31.10.2014 - <a href="#">Lorem ipsum</a> dolor sit amet,
-        consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-        Aenean massa.
-    </div>
-    <hr />
-    <div class="news-item">31.10.2014 - <a href="#">Lorem ipsum</a> dolor sit amet,
-        consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-        Aenean massa.
-    </div>
-    <h3>Zobrazení na mapě</h3>
-    <div id="map-container">
-        <div id="map-canvas"></div>
-        <a id="map-magnifier" href="#">Zvětšit mapu</a>
+    <div class="col-sm-3">
+        <div class="thumbnail">
+            <img src="/images/institutions/{$i->front_image}" alt="{$i->name}" title="{$i->name}" />
+        </div>
+        <div class="social">
+            <div class="fb-share pull-left">
+                <div class="fb-share-button" data-layout="button_count"></div>
+            </div>
+            <div class="tw-share pull-left">
+                <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+            </div>
+        </div>
+        <h3>Aktuálně</h3>
+        {foreach $news as $n}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {$n->date|date:'%d.%m.%Y'}
+                </div>
+                <div class="panel-body">
+                    {$n->text}
+                </div>
+            </div>
+        {/foreach}
+        <h3>Zobrazení na mapě</h3>
+        <div id="map-container">
+            <div id="map-canvas"></div>
+            <a id="map-magnifier" href="#">Zvětšit mapu</a>
+        </div>
     </div>
 </div>
 {/block}
@@ -74,5 +90,11 @@
         var map = new google.maps.Map(mapCanvas, mapOptions)
     }
     google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+<script>
+    !function(d,s,id) {
+        var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){ js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs); }
+    }(document, 'script', 'twitter-wjs');
 </script>
 {/block}

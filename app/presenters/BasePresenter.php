@@ -14,7 +14,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 {
     
     /** @var Nette\Database\Context */
-    private $db;
+    protected $db;
 
     public function __construct(Nette\Database\Context $database)
     {
@@ -29,8 +29,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         
         $this->template->metaDescription = 'metaDescription';
         $this->template->metaKeywords = array('kw1', 'kw2');
-        
-        
                 
         $categories = $this->db->table('category');
         $this->template->categories = $categories;

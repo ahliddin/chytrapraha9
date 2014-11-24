@@ -1,18 +1,28 @@
 body {
-    padding-top: 50px;
+    padding-top: 60px;
+    font-family: Arial;
 }
 .starter-template {
     padding: 40px 15px;
     text-align: center;
 }
 #logo-img {
-    padding-top: 0px;
+    margin: -10px 6px 0 0;
     float: left;
-    width: 50px;
+    max-height: 40px;
 }
 /* Footer */
 #footer {
     clear: both;
     text-align: center;
     width: 100%;
+}
+
+.jumbotron {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+div.fb-like {
+    margin-top: 16px;
 }

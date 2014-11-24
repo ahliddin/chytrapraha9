@@ -1,51 +1,10 @@
-#left {
-    float: left;
-    max-width: 50%;
-    overflow: hidden;
-    padding: 1em 1em 1em 1em;
-    width: 50%;
+
+div.fb-share,
+div.tw-share {
+    margin: 0 3px;
 }
-#mid {
-    float: left;
-    max-width: 25%;
-    min-width: 25%;
-    overflow: hidden;
-    padding: 1em 1em 1em 1em;
-    width: 25%;
-}
-#right {
-    float: left;
-    min-width: 20%;
-    max-width: 20%;
-    overflow: hidden;
-    padding: 0 0 1em 0;
-    width: 20%;
-}
-#map-container {
-    margin-left: auto;
-    margin-right: auto;
-    width: 90%;
-}
-#map-canvas {
-    height: 200px;
+
+div.social {
     width: 100%;
-}
-#map-magnifier {
-    float: right;
-    position: relative;
-}
-#contact {
-    border: 1px solid grey;
-    background: grey; 
-    margin: 0 0 0 0;
-    padding: 1em 1em 1em 1em;
-    width: 100%;
-}
-#contact h3 {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-}
-#contact h4 {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    margin-bottom: 8px;
 }
