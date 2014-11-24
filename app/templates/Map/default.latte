@@ -73,7 +73,7 @@
             icon: getMarkerImage(cId)
         });
         var infowindow = new google.maps.InfoWindow({
-            content: '<a href="#"><h4>' + i.name + '</h4></a>'
+            content: '<a href="/' + cId + '/' + i.urlId + '"><h4>' + i.name + '</h4></a>'
                         + '<div class="row infowindowContent"><address class="col-xs-8">'
                         + i.address_street + '<br />'
                         + i.address_city + '<br />'
