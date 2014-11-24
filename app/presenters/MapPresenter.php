@@ -29,6 +29,7 @@ class MapPresenter extends BasePresenter
                 'lat' => $i->lat,
                 'lng' => $i->lng,
                 'frontImage' => $i->front_image,
+                'urlId' => $i->url_id,
                 'default' => ($urlId == $i->url_id) ? true : false
             );
         }
