@@ -81,6 +81,7 @@
                         + '</address><div class="col-xs-4">'
                         + '<img src="/img/institutions/' + i.frontImage + '" width="130" height="80" />'
                         + '</div></div>'
+                        + '<a href="/' + cId + '/' + i.urlId + '">více informací</a>'
         });
         google.maps.event.addListener(marker, 'click', function() {
             infowindow.open(map, marker);
