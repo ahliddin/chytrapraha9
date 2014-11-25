@@ -17,6 +17,8 @@ class ListPresenter extends BasePresenter
                              ->fetch();
         $this->template->category = $category;
         
+        $this->template->metaDescription = strip_tags($category->text);
+        
         $institutions = $this->db->table('institution')
                                  ->select('institution.*, category.url_id AS category_url_id')
                                  ->where('id_category = ?', $category->id);

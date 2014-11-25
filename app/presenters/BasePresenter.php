@@ -15,10 +15,15 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     
     /** @var Nette\Database\Context */
     protected $db;
+    protected $metaDescription;
+    protected $metaKeywords;
 
     public function __construct(Nette\Database\Context $database)
     {
         parent::__construct();
+        
+        $this->metaKeywords = array();
+        $this->metaDescription = "pok";
 
         $this->db = $database;
     }
@@ -26,12 +31,15 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     public function startup()
     {
         parent::startup();
-        
-        $this->template->metaDescription = 'metaDescription';
-        $this->template->metaKeywords = array('kw1', 'kw2');
                 
         $categories = $this->db->table('category');
         $this->template->categories = $categories;
+    }
+    
+    public function beforeRender()
+    {
+        $this->template->metaDescription = $this->metaDescription;
+        $this->template->metaKeywords = $this->metaKeywords;
     }
 
 }

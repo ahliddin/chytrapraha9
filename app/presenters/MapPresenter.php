@@ -15,6 +15,8 @@ class MapPresenter extends BasePresenter
         $categories = $this->db->table('category');
         $this->template->categories = $categories;
         
+        $this->template->metaDescription = 'Mapa institucí Vám pomůže najít instituci nejblíže Vašemo domovu.';
+        
         
         $institutions = $this->db->table('institution')
                                  ->select('institution.*, category.name AS category_name, category.url_id AS category_url_id');

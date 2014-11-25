@@ -17,6 +17,8 @@ class DetailPresenter extends BasePresenter
                                 ->fetch();
         $this->template->i = $institution;
         
+        $this->template->metaDescription = strip_tags($institution->short_description);
+        
         $news = $this->db->query('SELECT institution.name, institution.url_id AS url_id, news.text, news.date
                                   FROM news
                                   JOIN institution ON news.id_institution = institution.id
