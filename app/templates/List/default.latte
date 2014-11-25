@@ -40,15 +40,17 @@
     <div class="col-sm-3">
         <h3>Aktuálně</h3>
         {foreach $news as $n}
-            <div class="news-item">{$n->date|date:'%d.%m.%Y'}
-                -
-                <a n:href="Detail:default categoryUrlId => $n->category_url_id, urlId => $n->url_id">
-                    {$n->name}
-                </a>
-                <br />
-                {$n->text}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {$n->date|date:'%d.%m.%Y'}
+                </div>
+                <div class="panel-body">
+                    <a n:href="Detail:default categoryUrlId => $n->category_url_id, urlId => $n->url_id">
+                        {$n->name}
+                    </a><br />
+                    {$n->text}
+                </div>
             </div>
-            {sep}<hr />{/sep}
         {/foreach}
     </div>
 </div>
