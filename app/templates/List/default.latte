@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-sm-9">
         <div class="panel">
-            <h1>{$category->name}</h1>
+            <h1 n:block="title">{$category->name}</h1>
             <div id="categoryDescription">
                 {$category->text|noescape}
             </div>
