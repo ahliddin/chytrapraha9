@@ -2,7 +2,8 @@
 namespace App\Presenters;
 
 use Nette\Application\UI,
-    Nette\Application\UI\Form as Form;
+    Nette\Application\UI\Form as Form,
+	Nette\Security\Passwords;
 
 class RegisterPresenter extends BasePresenter {
 
@@ -50,7 +51,7 @@ class RegisterPresenter extends BasePresenter {
     public function register($data) {
         unset($data["password2"]);
         $data["role"] = "guest";
-        $data["password"] = sha1($data["password"]);
+        $data["password"] = Passwords::hash($data["password"]);
         return $this->db->table('user')->insert($data);
     }
 }

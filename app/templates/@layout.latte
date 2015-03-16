@@ -51,8 +51,9 @@
                       </a>
                   </li>
               {/foreach}
-              <li><a n:href="Register:renderRegister">Registrovat</a></li>
-              <li><a n:href="Sign:in">Prihlasit</a></li>
+              {if !$user->loggedIn}<li><a n:href="Register:renderRegister">Registrovat</a></li>
+              <li><a n:href="Sign:in">Prihlasit</a></li>{/if}
+              {if $user->loggedIn}<li><a n:href="Sign:actionOut">Odhlasit</a></li>{/if}
             </ul>
         </div><!--/.nav-collapse -->
       </div>
