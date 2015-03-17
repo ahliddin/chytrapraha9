@@ -3,9 +3,9 @@ namespace App\Presenters;
 
 use Nette\Application\UI,
     Nette\Application\UI\Form as Form,
-	Nette\Security\Passwords;
+    Nette\Security\Passwords;
 
-class RegisterPresenter extends BasePresenter {
+class RegisterPresenter extends SecuredPresenter {
 
     /** @var users **/
     private $users;
