@@ -51,9 +51,12 @@
                       </a>
                   </li>
               {/foreach}
-              {if !$user->loggedIn}<li><a n:href="Register:renderRegister">Registrovat</a></li>
-              <li><a n:href="Sign:in">Prihlasit</a></li>{/if}
-              {if $user->loggedIn}<li><a n:href="Sign:actionOut">Odhlasit</a></li>{/if}
+              {if !$user->loggedIn}
+                <li><a n:href="Sign:in">Prihlasit</a></li>
+              {/if}
+              {if $user->loggedIn}
+                <li><a n:href="Sign:actionOut">Odhlasit</a></li>
+              {/if}
             </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -78,6 +81,8 @@
             <br />
             <hr />
             Vzdělávací instituce Prahy 9 | <a href="http://www.chytrapraha9.cz">www.chytrapraha9.cz</a>
+            <br />
+            <a n:href="Admin:">Administrace</a>
         </div>
 
         <div id="fb-root"></div>
