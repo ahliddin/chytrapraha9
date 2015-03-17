@@ -1,38 +1,32 @@
 
 {block content}
 
-<h1>Seznam institucí</h1>
+<h1>Seznam aktualit instituce {$institution->name}</h1>
 
 <p>
-    <a n:href="Admin:institutionAdd" class="btn btn-primary">
+    <a n:href="Admin:newsAdd" class="btn btn-primary">
         <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-        Přidat instituci
+        Přidat aktualitu
     </a>
 </p>
 <table class="table table-striped">
     <tr>
         <th>#</th>
-        <th>Název instituce</th>
-        <th>Adresa</th>
+        <th>Text</th>
+        <th>Datum</th>
         <th>Akce</th>
     </tr>
-    <tr n:foreach="$institutions as $i">
+    <tr n:foreach="$news as $n">
         <td>
-            {$i->id}
+            {$n->id}
         </td>
         <td>
-            <a n:href="Detail:default categoryUrlId => $i->category_url_id, urlId => $i->url_id">
-                {$i->name}
-            </a>
+            {$n->text}
         </td>
         <td>
-            {$i->address_city}, {$i->address_street}
+            {$n->date|date:'d.m.Y'}
         </td>
         <td>
-            <a n:href="Admin:newsList id => $i->id" class="btn btn-default btn-xs" title="Zobrazit aktuality">
-                <i class="glyphicon glyphicon-list" />
-            </a>
-            &nbsp;&nbsp;
             <a href="" class="btn btn-default btn-xs" title="Upravit">
                 <i class="glyphicon glyphicon-pencil" />
             </a>
@@ -44,9 +38,9 @@
     <tr n:if="!$iterations">
         <td colspan="4">
             V seznamu teď nic není.
-            <a n:href="Admin:institutionAdd" class="btn btn-success btn-xs">
+            <a n:href="Admin:newsAdd" class="btn btn-success btn-xs">
                 <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                Přidat instituci
+                Přidat aktualitu
             </a>
         </td>
     </tr>
