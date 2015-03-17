@@ -37,7 +37,7 @@ class SignPresenter extends BasePresenter {
         try {
             $this->getUser()->login($values->username, $values->password);
             $this->flashMessage('Vaše přihlášení proběhlo úspěšně', 'success');
-            $this->redirect('Homepage:');
+            $this->redirect('Admin:');
         } catch (Nette\Security\AuthenticationException $e) {
             $form->addError(Passwords::hash($values->password));
             $form->addError('Incorrect username or password.');
