@@ -14,9 +14,6 @@ class RegisterPresenter extends SecuredPresenter {
         parent::startup();
     }
 
-    public function renderRegister() {
-    }
-
     protected function createComponentRegisterForm() {
         $form = new Form;
         $form->addText('name', 'Jméno');
