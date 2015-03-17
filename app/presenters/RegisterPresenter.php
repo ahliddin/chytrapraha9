@@ -27,9 +27,7 @@ class RegisterPresenter extends BasePresenter {
                 ->addCondition(Form::FILLED)
                 ->addRule(Form::EMAIL, 'Neplatná emailová adresa');
         $form->addPassword('password', 'Heslo: *', 20)
-                ->setOption('description', 'Alespoň 6 znaků')
-                ->addRule(Form::FILLED, 'Vyplňte Vaše heslo')
-                ->addRule(Form::MIN_LENGTH, 'Heslo musí mít alespoň %d znaků.', 6);
+                ->addRule(Form::FILLED, 'Vyplňte Vaše heslo');
         $form->addPassword('password2', 'Heslo znovu: *', 20)
                 ->addConditionOn($form['password'], Form::VALID)
                 ->addRule(Form::FILLED, 'Heslo znovu')
