@@ -1,0 +1,60 @@
+
+{block content}
+
+<h1>Seznam uživatelů</h1>
+
+<p>
+    <a n:href="Register:" class="btn btn-primary">
+        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+        Přidat uživatele
+    </a>
+</p>
+<table class="table table-striped">
+    <tr>
+        <th>#</th>
+        <th>Příjmení, jméno</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Akce</th>
+    </tr>
+    <tr n:foreach="$users as $u">
+        <td>
+            {$u->id}
+        </td>
+        <td>
+            <strong>
+                {$u->surname}, {$u->name}
+            </strong>
+        </td>
+        <td>
+            {$u->email}
+        </td>
+        <td>
+            <?php if($u->role == "admin"): ?>
+                <span class="label label-danger">{$u->role}</span>
+            <?php else: ?>
+                <span class="label label-info">{$u->role}</span>
+            <?php endif; ?>
+        </td>
+        <td>
+            <a href="">
+                <i class="glyphicon glyphicon-edit" />
+            </a>
+            <a href="">
+                <i class="glyphicon glyphicon-remove" />
+            </a>
+        </td>
+    </tr>
+</table>
+
+{/block}
+
+{block scripts}
+{include parent}
+<script src="{$basePath}/js/admin.script.js"></script>
+{/block}
+
+{block styles}
+{include parent}
+<link href="{$basePath}/css/admin.style.css" rel="stylesheet">
+{/block}

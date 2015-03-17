@@ -1,0 +1,56 @@
+
+{block content}
+
+<h1>Seznam institucí</h1>
+
+<p>
+    <a n:href="Admin:institutionAdd" class="btn btn-primary">
+        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+        Přidat instituci
+    </a>
+</p>
+<table class="table table-striped">
+    <tr>
+        <th>#</th>
+        <th>Název instituce</th>
+        <th>Adresa</th>
+        <th>Akce</th>
+    </tr>
+    <tr n:foreach="$institutions as $i">
+        <td>
+            {$i->id}
+        </td>
+        <td>
+            <a n:href="Detail:default categoryUrlId => $i->category_url_id, urlId => $i->url_id">
+                {$i->name}
+            </a>
+        </td>
+        <td>
+            {$i->address_city}, {$i->address_street}
+        </td>
+        <td>
+            <a href="" class="btn btn-default btn-xs" title="Zobrazit aktuality">
+                <i class="glyphicon glyphicon-list" />
+            </a>
+            &nbsp;&nbsp;
+            <a href="" class="btn btn-default btn-xs" title="Upravit">
+                <i class="glyphicon glyphicon-pencil" />
+            </a>
+            <a href="" class="btn btn-default btn-xs" title="Smazat">
+                <i class="glyphicon glyphicon-remove" />
+            </a>
+        </td>
+    </tr>
+</table>
+
+{/block}
+
+{block scripts}
+{include parent}
+<script src="{$basePath}/js/admin.script.js"></script>
+{/block}
+
+{block styles}
+{include parent}
+<link href="{$basePath}/css/admin.style.css" rel="stylesheet">
+{/block}

@@ -29,6 +29,13 @@ class RegisterPresenter extends SecuredPresenter {
                 ->addConditionOn($form['password'], Form::VALID)
                 ->addRule(Form::FILLED, 'Heslo znovu')
                 ->addRule(Form::EQUAL, 'Hesla se neshodují.', $form['password']);
+        
+        $roles = array(
+            'manager' => 'Správce instituce',
+            'admin' => 'Administrátor'
+        );
+        $form->addSelect('role', 'Role:', $roles);
+        
         $form->addSubmit('send', 'Registrovat');
         $form->onSuccess[] = callback($this, 'registerFormSubmitted');
         return $form;
@@ -38,14 +45,14 @@ class RegisterPresenter extends SecuredPresenter {
         $values = $form->getValues();
         $new_user_id = $this->register($values);
         if ($new_user_id) {
-            $this->flashMessage('Registrace se zdařila, jo!');
-            $this->redirect('Sign:in');
+            $this->flashMessage('Přidání uživatele proběhlo úspěšně.', "success");
+            $this->redirect('Admin:usersList');
         }
     }
 
     public function register($data) {
         unset($data["password2"]);
-        $data["role"] = "guest";
+        //$data["role"] = "manager";
         $data["password"] = Passwords::hash($data["password"]);
         return $this->db->table('user')->insert($data);
     }

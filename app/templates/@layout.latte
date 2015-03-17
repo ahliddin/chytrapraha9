@@ -54,13 +54,12 @@
               {if !$user->loggedIn}
                 <li><a n:href="Sign:in">Prihlasit</a></li>
               {/if}
-              {if $user->loggedIn}
-                <li><a n:href="Sign:actionOut">Odhlasit</a></li>
-              {/if}
             </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+    
+    
     <div n:if="count($flashes)>0" id="flashmessages">
         <div n:foreach="$flashes as $flash"
              class='flashmessage {$flash->type} alert alert-{$flash->type} alert-dismissible' role="error">
@@ -71,6 +70,16 @@
         </div>
     </div>
     <div class="container">
+            
+        {if $user->loggedIn}
+        <p></p>
+        <div>
+            <a class="btn btn-default" n:href="Admin:institutionsList">Seznam institucí</a>
+            <a class="btn btn-default" n:href="Admin:usersList">Seznam uživatelů</a>
+            <a class="btn btn-default" n:href="Register:renderRegister">renderRegister</a>
+            <a class="btn btn-danger" n:href="Sign:out">Odhlasit</a>
+        </div>
+        {/if}
 
         {include content}
 
