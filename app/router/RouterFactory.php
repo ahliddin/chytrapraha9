@@ -24,7 +24,7 @@ class RouterFactory
         $router[] = new Route('index.php', 'Homepage:default');
         $router[] = new Route('registrace', 'Register:renderRegister');
         $router[] = new Route('prihlaseni', 'Sign:in');
-        $router[] = new Route('odhlaseni', 'Sign:actionOut');
+        $router[] = new Route('odhlaseni', 'Sign:out');
         $router[] = new Route('mapa-instituci[/<urlId>]', 'Map:default');
         $router[] = new Route('<urlId>', 'List:default');
         $router[] = new Route('<categoryUrlId>/<urlId>', 'Detail:default');
