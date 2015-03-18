@@ -78,14 +78,18 @@
                 <i class="glyphicon glyphicon-list" />
                 Seznam institucí
             </a>
+            {if $isAdmin}
             <a class="btn btn-default" n:href="Admin:usersList">
                 <i class="glyphicon glyphicon-user" />
                 Seznam uživatelů
             </a>
+            {/if}
+            {if $isAdmin}
             <a class="btn btn-default" n:href="Register:">
                 <i class="glyphicon glyphicon-plus-sign" />
                 Přidat instituci
             </a>
+            {/if}
             <a class="btn btn-danger" n:href="Sign:out">
                 Odhlasit
             </a>

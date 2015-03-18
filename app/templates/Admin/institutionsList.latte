@@ -3,12 +3,15 @@
 
 <h1>Seznam institucí</h1>
 
+{if $isAdmin}
 <p>
     <a n:href="Register:" class="btn btn-primary">
         <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
         Přidat instituci
     </a>
 </p>
+{/if}
+
 <table class="table table-striped">
     <tr>
         <th>#</th>
@@ -33,10 +36,10 @@
                 <i class="glyphicon glyphicon-list" />
             </a>
             &nbsp;&nbsp;
-            <a href="" class="btn btn-default btn-xs" title="Upravit">
+            <a n:href="Admin:institutionEdit institutionId => $i->id" class="btn btn-default btn-xs" title="Upravit">
                 <i class="glyphicon glyphicon-pencil" />
             </a>
-            <a href="" class="btn btn-default btn-xs" title="Smazat">
+            <a n:href="Admin:institutionRemove institutionId => $i->id" class="btn btn-default btn-xs" title="Smazat">
                 <i class="glyphicon glyphicon-remove" />
             </a>
         </td>
@@ -44,10 +47,6 @@
     <tr n:if="!$iterations">
         <td colspan="4">
             V seznamu teď nic není.
-            <a n:href="Admin:institutionAdd" class="btn btn-success btn-xs">
-                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                Přidat instituci
-            </a>
         </td>
     </tr>
 </table>

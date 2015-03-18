@@ -40,6 +40,33 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     {
         $this->template->metaDescription = $this->metaDescription;
         $this->template->metaKeywords = $this->metaKeywords;
+        
+        $this->template->userRole = $this->getUserRole();
+        $this->template->isAdmin = $this->isAdmin();
+    }
+    
+    protected function getUserRole()
+    {
+        $roles = $this->getUser()->getRoles();
+        if ($roles && $roles[0]) 
+            return $roles[0];
+        else
+            return 'guest';
+    }
+    
+    protected function isAdmin()
+    {
+        return $this->getUserRole() === 'admin';
+    }
+    
+    protected function isManager()
+    {
+        return $this->getUserRole() === 'manager';
+    }
+    
+    protected function isInstitutionManager($institutionId)
+    {
+        return $this->getUser()->getIdentity()->id_institution == $institutionId || $this->isAdmin();
     }
 
 }

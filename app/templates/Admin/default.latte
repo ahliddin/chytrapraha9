@@ -8,14 +8,18 @@
         <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
         Seznam institucí
     </a>
+    {if $isAdmin}
     <a n:href="Admin:usersList" class="btn btn-primary btn-lg">
         <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
         Seznam uživatelů
     </a>
+    {/if}
+    {if $isAdmin}
     <a n:href="Register:" class="btn btn-primary btn-lg">
-        <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
-        Seznam institucí
+        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+        Přidat instituci
     </a>
+    {/if}
 </div>
 
 {/block}
