@@ -39,7 +39,6 @@ class SignPresenter extends BasePresenter {
             $this->flashMessage('Vaše přihlášení proběhlo úspěšně', 'success');
             $this->redirect('Admin:');
         } catch (Nette\Security\AuthenticationException $e) {
-            $form->addError(Passwords::hash($values->password));
             $form->addError('Neplatný e-mail nebo heslo.');
         }
     }
