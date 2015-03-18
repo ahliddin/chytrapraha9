@@ -77,6 +77,12 @@ class RegisterPresenter extends SecuredPresenter {
             'contact_website' => $fValues['contactWebsite']
         );
         $institutionId = $this->db->table('institution')->insert($institutionData);
+
+        $urlString = $institutionId.'-'.\Nette\Utils\Strings::normalize($fValues['institutionName']);
+        $update = array('url_id' => $urlString);
+        $this->db->query('UPDATE institution SET ? WHERE id = ?', $update, $institutionId);
+                
+//        $this->db->table('institution')->get($institutionId)->getTable()->
         if (!$institutionId) {
             $this->flashMessage('Neporařilo se vložit instituci.', 'danger');
             $this->redirect('Admin:institutionsList');
