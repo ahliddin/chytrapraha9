@@ -26,7 +26,7 @@ class SignPresenter extends BasePresenter {
         $form->addPassword('password', 'Heslo:')
                 ->setRequired('Prosím, zadejte Vaše heslo.');
 
-        $form->addSubmit('send', 'Sign in');
+        $form->addSubmit('send', 'Přihlásit');
 
         // call method signInFormSucceeded() on success
         $form->onSuccess[] = array($this, 'signInFormSucceeded');
