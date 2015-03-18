@@ -20,11 +20,11 @@ class SignPresenter extends BasePresenter {
      */
     protected function createComponentSignInForm() {
         $form = new Form;
-        $form->addText('username', 'Username:')
-                ->setRequired('Please enter your username.');
+        $form->addText('username', 'E-mail:')
+                ->setRequired('Prosím, zadejte Váš e-mail.');
 
-        $form->addPassword('password', 'Password:')
-                ->setRequired('Please enter your password.');
+        $form->addPassword('password', 'Heslo:')
+                ->setRequired('Prosím, zadejte Vaše heslo.');
 
         $form->addSubmit('send', 'Sign in');
 
@@ -40,7 +40,7 @@ class SignPresenter extends BasePresenter {
             $this->redirect('Admin:');
         } catch (Nette\Security\AuthenticationException $e) {
             $form->addError(Passwords::hash($values->password));
-            $form->addError('Incorrect username or password.');
+            $form->addError('Neplatný e-mail nebo heslo.');
         }
     }
 

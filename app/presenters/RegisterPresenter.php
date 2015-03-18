@@ -28,7 +28,7 @@ class RegisterPresenter extends SecuredPresenter {
         $form->addText('contactWebsite', 'WWW');
         
         $form->addText('name', 'Jméno');
-        $form->addText('surname', 'Prijmeni');
+        $form->addText('surname', 'Přijmení');
         $form->addText('email', 'E-mail: *', 35)
                 ->setEmptyValue('@')
                 ->addRule(Form::FILLED, 'Vyplňte Váš email')
