@@ -16,6 +16,17 @@ class RegisterPresenter extends SecuredPresenter {
 
     protected function createComponentRegisterForm() {
         $form = new Form;
+        $form->addText('institutionName', 'Název instituce');
+        $form->addSelect('category', 'Kategorie', $this->getCategories());
+        $form->addTextArea('shortDesc', 'Krátký popis');
+        $form->addText('street', 'Ulice');
+        $form->addText('city', 'Město');
+        $form->addText('postalCode', 'PSČ');
+        
+        $form->addText('contactPhone', 'Kontaktní telefon');
+        $form->addText('contactEmail', 'Email');
+        $form->addText('contactWebsite', 'WWW');
+        
         $form->addText('name', 'Jméno');
         $form->addText('surname', 'Prijmeni');
         $form->addText('email', 'E-mail: *', 35)
@@ -30,30 +41,64 @@ class RegisterPresenter extends SecuredPresenter {
                 ->addRule(Form::FILLED, 'Heslo znovu')
                 ->addRule(Form::EQUAL, 'Hesla se neshodují.', $form['password']);
         
-        $roles = array(
-            'manager' => 'Správce instituce',
-            'admin' => 'Administrátor'
-        );
-        $form->addSelect('role', 'Role:', $roles);
+//        $roles = array(
+//            'manager' => 'Správce instituce',
+//            'admin' => 'Administrátor'
+//        );
+//        $form->addSelect('role', 'Role:', $roles);
         
         $form->addSubmit('send', 'Registrovat');
         $form->onSuccess[] = callback($this, 'registerFormSubmitted');
         return $form;
     }
-
-    public function registerFormSubmitted(UI\Form $form) {
-        $values = $form->getValues();
-        $new_user_id = $this->register($values);
-        if ($new_user_id) {
-            $this->flashMessage('Přidání uživatele proběhlo úspěšně.', "success");
-            $this->redirect('Admin:usersList');
+    
+    private function getCategories() {
+        $dbCats = $this->db->table('category');
+        $cats = array();
+        foreach ($dbCats as $c) {
+            $cats[$c->id] = $c->name;
         }
+        
+        return $cats;
     }
 
-    public function register($data) {
-        unset($data["password2"]);
-        //$data["role"] = "manager";
-        $data["password"] = Passwords::hash($data["password"]);
-        return $this->db->table('user')->insert($data);
+    public function registerFormSubmitted(UI\Form $form) {       
+        $fValues = $form->getValues();
+        
+        $institutionData = array(
+            'id_category' => $fValues['category'],
+            'name' => $fValues['institutionName'],
+            'short_description' => $fValues['shortDesc'],
+            'address_street' => $fValues['street'],
+            'address_city' => $fValues['city'],
+            'address_postal_code' => $fValues['postalCode'],
+            'contact_phone' => $fValues['contactPhone'],
+            'contact_email' => $fValues['contactEmail'],
+            'contact_website' => $fValues['contactWebsite']
+        );
+        $institutionId = $this->db->table('institution')->insert($institutionData);
+        if (!$institutionId) {
+            $this->flashMessage('Neporařilo se vložit instituci.', 'danger');
+            $this->redirect('Admin:institutionsList');
+            return ;
+        }
+        
+        $user = array(
+            'id_institution' => $institutionId,
+            'name' => $fValues['name'],
+            'surname' => $fValues['surname'],
+            'email' => $fValues['email'],
+            'password' => Passwords::hash($fValues['password']),
+            'role' => 'manager'
+        );
+        $userId = $this->db->table('user')->insert($user);
+        if (!$userId) {
+            $this->flashMessage('Neporařilo se vložit uživatele.', 'danger');
+            $this->redirect('Admin:institutionsList');
+            return ;
+        }
+        
+        $this->flashMessage('Objekty uživatele a instituce úspěšně vytvořeny.', 'success');
+        $this->redirect('Admin:institutionsList');
     }
 }

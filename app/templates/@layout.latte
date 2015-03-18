@@ -74,10 +74,21 @@
         {if $user->loggedIn}
         <p></p>
         <div>
-            <a class="btn btn-default" n:href="Admin:institutionsList">Seznam institucí</a>
-            <a class="btn btn-default" n:href="Admin:usersList">Seznam uživatelů</a>
-            <a class="btn btn-default" n:href="Register:renderRegister">renderRegister</a>
-            <a class="btn btn-danger" n:href="Sign:out">Odhlasit</a>
+            <a class="btn btn-default" n:href="Admin:institutionsList">
+                <i class="glyphicon glyphicon-list" />
+                Seznam institucí
+            </a>
+            <a class="btn btn-default" n:href="Admin:usersList">
+                <i class="glyphicon glyphicon-user" />
+                Seznam uživatelů
+            </a>
+            <a class="btn btn-default" n:href="Register:">
+                <i class="glyphicon glyphicon-plus-sign" />
+                Přidat instituci
+            </a>
+            <a class="btn btn-danger" n:href="Sign:out">
+                Odhlasit
+            </a>
         </div>
         {/if}
 

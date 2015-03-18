@@ -4,7 +4,7 @@
 <h1>Seznam institucí</h1>
 
 <p>
-    <a n:href="Admin:institutionAdd" class="btn btn-primary">
+    <a n:href="Register:" class="btn btn-primary">
         <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
         Přidat instituci
     </a>
@@ -29,7 +29,7 @@
             {$i->address_city}, {$i->address_street}
         </td>
         <td>
-            <a n:href="Admin:newsList id => $i->id" class="btn btn-default btn-xs" title="Zobrazit aktuality">
+            <a n:href="Admin:newsList institutionId => $i->id" class="btn btn-default btn-xs" title="Zobrazit aktuality">
                 <i class="glyphicon glyphicon-list" />
             </a>
             &nbsp;&nbsp;

@@ -4,7 +4,7 @@
 <h1>Seznam aktualit instituce {$institution->name}</h1>
 
 <p>
-    <a n:href="Admin:newsAdd" class="btn btn-primary">
+    <a n:href="Admin:newsAdd institutionId => $institution->id" class="btn btn-primary">
         <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
         Přidat aktualitu
     </a>
@@ -27,10 +27,7 @@
             {$n->date|date:'d.m.Y'}
         </td>
         <td>
-            <a href="" class="btn btn-default btn-xs" title="Upravit">
-                <i class="glyphicon glyphicon-pencil" />
-            </a>
-            <a href="" class="btn btn-default btn-xs" title="Smazat">
+            <a n:href="Admin:newsRemove newsId => $n->id" class="btn btn-default btn-xs" title="Smazat">
                 <i class="glyphicon glyphicon-remove" />
             </a>
         </td>
@@ -38,7 +35,7 @@
     <tr n:if="!$iterations">
         <td colspan="4">
             V seznamu teď nic není.
-            <a n:href="Admin:newsAdd" class="btn btn-success btn-xs">
+            <a n:href="Admin:newsAdd institutionId => $institution->id" class="btn btn-success btn-xs">
                 <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
                 Přidat aktualitu
             </a>
