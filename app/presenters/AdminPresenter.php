@@ -5,6 +5,7 @@ namespace App\Presenters;
 use Nette,
     Nette\Application\UI,
     Nette\Application\UI\Form as Form,
+    Nette\Security\Passwords,
     App\Model;
 
 
@@ -101,7 +102,7 @@ class AdminPresenter extends SecuredPresenter
         
         $this['institutionEditForm']->setDefaults($institution);
     }
-    
+
     protected function createComponentInstitutionEditForm() {
         $form = new Form;
         $form->addHidden('id');
@@ -210,5 +211,42 @@ class AdminPresenter extends SecuredPresenter
         }
         
         return $cats;
+    }
+
+    public function renderUserEdit($userId) {
+        if (!$this->isAdmin()) {
+            $this->flashMessage('Neoprávněný přístup', 'danger');
+            $this->redirect('Admin:');
+        }
+        $user_info = $this->db->table('user')->get($userId);
+        $this->template->user_info = $user_info;
+        $this['userEditForm']->setDefaults(array('id' => $user_info->id));
+    }
+
+    protected function createComponentUserEditForm() {
+        $form = new Form;
+        $form->addHidden('id');
+        $form->addPassword('password', 'Heslo: *', 20)
+                ->addRule(Form::FILLED, 'Vyplňte nové heslo');
+        $form->addPassword('password2', 'Heslo znovu: *', 20)
+                ->addConditionOn($form['password'], Form::VALID)
+                ->addRule(Form::FILLED, 'Heslo znovu')
+                ->addRule(Form::EQUAL, 'Hesla se neshodují.', $form['password']);
+        $form->addSubmit('send', 'Změnit');
+        $form->onSuccess[] = callback($this, 'userFormSubmitted');
+        return $form;
+    }
+
+    public function userFormSubmitted(UI\Form $form) {
+        if (!$this->isAdmin()) {
+            $this->flashMessage('Neoprávněný přístup', 'danger');
+            $this->redirect('Admin:');
+        }
+        $values = $form->getValues();
+        $user = $this->db->table('user')->get($values['id']);
+        $data = array('password' => Passwords::hash($values['password']));
+        $user->update($data);
+        $this->flashMessage('Heslo bylo úspěšně změněno.');
+        $this->redirect('Admin:usersList');
     }
 }
