@@ -48,7 +48,7 @@
                     <a n:href="Detail:default categoryUrlId => $n->category_url_id, urlId => $n->url_id">
                         {$n->name}
                     </a><br />
-                    {$n->text}
+                    {$n->text|noescape}
                 </div>
             </div>
         {/foreach}

@@ -89,7 +89,7 @@
                     {$n->date|date:'%d.%m.%Y'}
                 </div>
                 <div class="panel-body">
-                    {$n->text}
+                    {$n->text|noescape}
                 </div>
             </div>
         {/foreach}
