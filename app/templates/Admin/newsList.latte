@@ -21,7 +21,7 @@
             {$n->id}
         </td>
         <td>
-            {$n->text}
+            {$n->text|noescape}
         </td>
         <td>
             {$n->date|date:'d.m.Y'}
